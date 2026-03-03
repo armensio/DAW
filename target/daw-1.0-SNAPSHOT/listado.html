@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>DAW_Market</title>
+</head>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css"
+      integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+<body>
+
+<nav class="navbar navbar-dark bg-dark px-3">
+    <span class="navbar-brand">Tienda de comida DAW_Market</span>
+    <form class="d-flex mx-auto" role="search">
+        <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+        <button class="btn btn-outline-light" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </form>
+    <div class="d-flex gap-3">
+        <a href="perfil.html" class="text-white fs-4">
+            <i class="fa-solid fa-user"></i>
+        </a>
+        <a href="carro.html" class="text-white fs-4">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </div>
+</nav>
+
+<div class="container mt-3">
+    <h1>Listado de Productos</h1>
+    <section>
+        <table class="table table-striped-columns">
+            <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Comprar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><img src="lentejas.jpg" width="150"></td>
+                <td>Lentejas</td>
+                <td>1 kilo</td>
+                <td>1€</td>
+                <td>
+                    <form action="anadir_a_carro.html" method="post">
+                        Cantidad:
+                        <input type="number" name="cantidad" value="1" min="1" style="width:60px;">
+                        <button type="submit">
+                            <i class="fa-solid fa-basket-shopping"></i> Añadir
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td><img src="arroz.jpg" width="150"></td>
+                <td>Arroz</td>
+                <td>1 kilo</td>
+                <td>1,50€</td>
+                <td>
+                    <form action="anadir_a_carro.html" method="post">
+                        Cantidad:
+                        <input type="number" name="cantidad" value="1" min="1" style="width:60px;">
+                        <button type="submit">
+                            <i class="fa-solid fa-basket-shopping"></i> Añadir
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td><img src="macarrones.jpg" width="150"></td>
+                <td>Macarrones</td>
+                <td>1 kilo</td>
+                <td>1,20€</td>
+                <td>
+                    <form action="anadir_a_carro.html" method="post">
+                        Cantidad:
+                        <input type="number" name="cantidad" value="1" min="1" style="width:60px;">
+                        <button type="submit">
+                            <i class="fa-solid fa-basket-shopping"></i> Añadir
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<script src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js"
+        integrity="sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+</body>
+</html>
