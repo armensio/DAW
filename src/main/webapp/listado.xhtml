@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="titulo">Listado de Productos</ui:define>
+
+    <ui:define name="contenido">
+        <h1>Listado de Productos</h1>
+        <table class="table table-striped-columns">
+            <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Comprar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><h:graphicImage value="lentejas.jpg" width="150"/></td>
+                <td>Lentejas</td>
+                <td>1 kilo</td>
+                <td>1€</td>
+                <td>
+                    <h:form>
+                        <span>Cantidad: </span>
+                        <h:inputText value="1" style="width:60px;"/>
+                        <h:commandButton value="Añadir" styleClass="btn btn-sm btn-primary"/>
+                    </h:form>
+                </td>
+            </tr>
+            <tr>
+                <td><h:graphicImage value="arroz.jpg" width="150"/></td>
+                <td>Arroz</td>
+                <td>1 kilo</td>
+                <td>1,50€</td>
+                <td>
+                    <h:form>
+                        <span>Cantidad: </span>
+                        <h:inputText value="1" style="width:60px;"/>
+                        <h:commandButton value="Añadir" styleClass="btn btn-sm btn-primary"/>
+                    </h:form>
+                </td>
+            </tr>
+            <tr>
+                <td><h:graphicImage value="macarrones.jpg" width="150"/></td>
+                <td>Macarrones</td>
+                <td>1 kilo</td>
+                <td>1,20€</td>
+                <td>
+                    <h:form>
+                        <span>Cantidad: </span>
+                        <h:inputText value="1" style="width:60px;"/>
+                        <h:commandButton value="Añadir" styleClass="btn btn-sm btn-primary"/>
+                    </h:form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="alta_producto.xhtml" class="btn btn-success mt-2">
+            <i class="fa-solid fa-plus me-1"></i> Nuevo Producto
+        </a>
+    </ui:define>
+
+</ui:composition>

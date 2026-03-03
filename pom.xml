@@ -36,6 +36,15 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!--Claude-->
+        <!-- JSF Implementation (Mojarra) -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.faces</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
