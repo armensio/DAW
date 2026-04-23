@@ -1,16 +1,23 @@
 package daw.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /**
  * Clase que representa una categoría de productos.
  *
  * Se utiliza para clasificar los productos dentro del sistema.
  * Cada categoría tiene un identificador único y un nombre descriptivo.
  */
+@Entity
 public class Categoria {
 
     /**
      * Identificador único de la categoría.
      */
+    @Id
     private Integer idCategoria = 0;
 
     /**

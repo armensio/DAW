@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import daw.DAOMap;
+
 
 /**
  * Implementación del DAO (Data Access Object) para la entidad Pedido.
@@ -22,6 +24,7 @@ import java.util.Map;
  * se pierden al reiniciar la aplicación.
  */
 @ApplicationScoped
+@DAOMap
 public class PedidoDAO implements PedidoDAOInt, Serializable {
 
     /**

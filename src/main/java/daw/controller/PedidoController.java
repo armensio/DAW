@@ -1,10 +1,14 @@
 package daw.controller;
 
-import daw.dao.LineaPedidoDAO;
+import daw.DAOJData;
+import daw.JData.LineaPedidoDAOJData;
+import daw.JData.PedidoDAOJData;
 import daw.dao.DAOException;
-import daw.dao.PedidoDAO;
+
 import daw.model.LineaPedido;
 import daw.model.Pedido;
+
+import daw.model.Producto;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -23,19 +27,25 @@ import java.util.List;
  *
  * Actúa como intermediario entre la capa de presentación (JSF) y la capa DAO.
  */
+import jakarta.enterprise.context.SessionScoped;
+
 @Named("pedidoCtrl")
-@ViewScoped
+@SessionScoped
 public class PedidoController implements Serializable {
 
     /**
      * DAO de pedidos.
      */
-    @Inject private PedidoDAO pedidoDAO;
+    @Inject
+    @DAOJData
+    private PedidoDAOJData pedidoDAO;
 
     /**
      * DAO de líneas de pedido.
      */
-    @Inject private LineaPedidoDAO lineaPedidoDAO;
+    @Inject
+    @DAOJData
+    private LineaPedidoDAOJData lineaPedidoDAO;
 
     /**
      * Contexto de JSF para mostrar mensajes en la interfaz.
@@ -56,6 +66,16 @@ public class PedidoController implements Serializable {
      * Líneas asociadas al pedido actual.
      */
     private List<LineaPedido> lineasPedidoActual;
+
+    private Producto productoSeleccionado;
+
+    public Producto getProductoSeleccionado() {
+        return productoSeleccionado;
+    }
+
+    public void setProductoSeleccionado(Producto productoSeleccionado) {
+        this.productoSeleccionado = productoSeleccionado;
+    }
 
     public PedidoController() { }
 
@@ -132,5 +152,28 @@ public class PedidoController implements Serializable {
 
     public List<LineaPedido> getLineasPedidoActual() {
         return lineasPedidoActual;
+    }
+
+    public void addProducto() {
+
+        Producto p = productoSeleccionado;
+
+        System.out.println("ENTRA EN ADD");
+
+        if (pedido == null || pedido.getIdPedido() == 0) {
+            pedido = new Pedido();
+            pedido.setEstado("pendiente");
+            pedidoDAO.crea(pedido);
+        }
+
+        LineaPedido linea = new LineaPedido();
+        linea.setIdProducto(p.getIdProducto());
+        linea.setCantidad(1);
+        linea.setPrecioUnitario(p.getPrecio().doubleValue());
+        linea.setIdPedido(pedido.getIdPedido());
+
+        lineaPedidoDAO.crea(linea);
+
+        recupera();
     }
 }

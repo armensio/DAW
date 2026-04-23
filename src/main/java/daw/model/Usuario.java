@@ -1,7 +1,8 @@
 package daw.model;
 
 import java.util.Date;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 /**
  * Clase que representa un usuario del sistema.
  *
@@ -12,11 +13,13 @@ import java.util.Date;
  * Se relaciona con:
  * - Pedido (un usuario puede tener varios pedidos)
  */
+@Entity
 public class Usuario {
 
     /**
      * Identificador único del usuario.
      */
+    @Id
     private Integer idUsuario = 0;
 
     /**

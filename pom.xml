@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
@@ -12,18 +13,31 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>25</maven.compiler.target>
-        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
         <junit.version>5.13.2</junit.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.1.0</version>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>jakarta.data</groupId>
+            <artifactId>jakarta.data-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.224</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -36,24 +50,14 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!--Claude-->
-        <!-- JSF Implementation (Mojarra) -->
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>jakarta.faces</artifactId>
-            <version>4.0.1</version>
-        </dependency>
-
-            <!-- Jakarta EE Web Profile (incluye CDI, JSF, etc.) -->
-        <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-web-api</artifactId>
-            <version>11.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>payara</id>
+            <url>https://repo.payara.fish</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -63,7 +67,6 @@
                 <version>3.4.0</version>
             </plugin>
 
-            <!--Pagina web en la nube-->
             <plugin>
                 <groupId>fish.payara.maven.plugins</groupId>
                 <artifactId>payara-micro-maven-plugin</artifactId>
@@ -72,21 +75,6 @@
                     <payaraVersion>7.2026.2</payaraVersion>
                     <deployWar>true</deployWar>
                     <contextRoot>/</contextRoot>
-                        <!-- Opcional: optimizar los recursos del servidor -->
-                    <commandLineOptions>
-                        <option>
-                            <key>--disablephonehome</key>
-                        </option>
-                        <option>
-                            <key>--noHazelcast</key>
-                        </option>
-                    </commandLineOptions>
-                    <javaCommandLineOptions>
-                        <option>
-                            <key>-Djava.security.egd</key>
-                            <value>file:/dev/./urandom</value>
-                        </option>
-                    </javaCommandLineOptions>
                 </configuration>
             </plugin>
         </plugins>

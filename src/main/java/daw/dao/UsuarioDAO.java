@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import daw.DAOMap;
 
 /**
  * Implementación del DAO (Data Access Object) para la entidad Usuario.
@@ -22,6 +23,7 @@ import java.util.Map;
  * se pierden al reiniciar la aplicación.
  */
 @ApplicationScoped
+@DAOMap
 public class UsuarioDAO implements UsuarioDAOInt, Serializable {
 
     /**
@@ -49,6 +51,16 @@ public class UsuarioDAO implements UsuarioDAOInt, Serializable {
      *
      * @return lista de usuarios; nunca null
      */
+
+    public Usuario login(String email, String password) {
+        for (Usuario u : usuarios.values()) {
+            if (u.getEmail().equals(email) &&
+                    u.getContrasena().equals(password)) {
+                return new Usuario(u);
+            }
+        }
+        return null;
+    }
     @Override
     public List<Usuario> buscaTodos() {
         List<Usuario> lista = new ArrayList<>();

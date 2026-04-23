@@ -1,16 +1,19 @@
 package daw.controller;
 
-import daw.dao.CategoriaDAO;
+import daw.JData.ProductoDAOJData;
+import daw.JData.CategoriaDAOJData;
 import daw.dao.DAOException;
-import daw.dao.ProductoDAO;
 import daw.model.Categoria;
 import daw.model.Producto;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
+import daw.DAOJData;
 
 import java.io.Serializable;
 import java.util.List;
@@ -30,13 +33,15 @@ public class ProductoController implements Serializable {
     /**
      * DAO de productos para acceso a datos.
      */
-    @Inject private ProductoDAO productoDAO;
-
+    @Inject
+    @DAOJData
+    private ProductoDAOJData productoDAO;
     /**
      * DAO de categorías para obtener listas de categorías.
      */
-    @Inject private CategoriaDAO categoriaDAO;
-
+    @Inject
+    @DAOJData
+    private CategoriaDAOJData categoriaDAO;
     /**
      * Contexto de JSF para mostrar mensajes en la interfaz.
      */

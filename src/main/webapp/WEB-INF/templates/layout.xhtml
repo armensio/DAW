@@ -7,6 +7,7 @@
 <h:head>
     <meta charset="UTF-8"/>
     <title><ui:insert name="titulo">DAW_Market</ui:insert></title>
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css"/>
     <link rel="stylesheet"
@@ -16,14 +17,22 @@
 <h:body>
 
     <nav class="navbar navbar-dark bg-dark px-3">
+
+        <!-- LOGO -->
         <span class="navbar-brand">DAW_Market</span>
+
+        <!-- BUSCADOR -->
         <div class="d-flex mx-auto">
             <input class="form-control me-2" type="search" placeholder="Buscar..."/>
             <button class="btn btn-outline-light" type="button">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
-        <div class="d-flex gap-3">
+
+        <!-- MENU DERECHA -->
+        <div class="d-flex align-items-center gap-3">
+
+            <!-- ICONOS -->
             <h:link outcome="menu" styleClass="text-white fs-4">
                 <i class="fa-solid fa-house"></i>
             </h:link>
@@ -35,6 +44,21 @@
             <h:link outcome="carro" styleClass="text-white fs-4">
                 <i class="fa-solid fa-cart-shopping"></i>
             </h:link>
+
+            <!-- USUARIO + LOGOUT -->
+            <h:panelGroup rendered="#{prefs.logueado}">
+                <h:form class="d-flex align-items-center gap-2">
+
+                    <h:outputText value="#{prefs.usuario}"
+                                  styleClass="text-white fw-bold"/>
+
+                    <h:commandButton value="Salir"
+                                     action="#{loginCtrl.logout}"
+                                     styleClass="btn btn-danger btn-sm"/>
+
+                </h:form>
+            </h:panelGroup>
+
         </div>
     </nav>
 
@@ -42,7 +66,7 @@
         <ui:insert name="contenido"/>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js"></script>
 
 </h:body>
 </html>

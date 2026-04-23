@@ -3,6 +3,9 @@
                 xmlns:h="jakarta.faces.html"
                 xmlns:f="jakarta.faces.core"
                 template="/WEB-INF/templates/layout.xhtml">
+    <f:metadata>
+        <f:viewAction action="#{loginCtrl.comprobarLogin}" />
+    </f:metadata>
 
     <ui:define name="titulo">Mis Pedidos - DAW_Market</ui:define>
 

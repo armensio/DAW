@@ -1,51 +1,89 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="jakarta.faces.facelets"
-                xmlns:h="jakarta.faces.html"
-                template="/WEB-INF/templates/layout.xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
 
-    <!--<ui:define name="titulo">Menú Principal - DAW_Market</ui:define>-->
+<!-- 🔐 Protección de acceso -->
+<f:metadata>
+    <f:viewAction action="#{loginCtrl.comprobarLogin}" />
+</f:metadata>
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="titulo">
+        Menú Principal - DAW_Market
+    </ui:define>
+
 
     <ui:define name="contenido">
+
         <div style="max-width:600px; margin: 0 auto;" class="mt-4">
-            <h2><i class="fa-solid fa-house me-2"/>Menú Principal</h2>
+
+            <h2>
+                <i class="fa-solid fa-house me-2"></i>
+                Menú Principal
+            </h2>
+
+            <h:outputText value="Bienvenido #{prefs.usuario}" />
+
             <hr/>
 
-            <p class="mb-4 text-muted">Selecciona la operación que deseas realizar:</p>
+            <!-- 👤 Usuario logueado -->
+            <p>
+                Bienvenido <strong>#{prefs.usuario}</strong>
+            </p>
+
+            <p class="mb-4 text-muted">
+                Selecciona la operación que deseas realizar:
+            </p>
 
             <div class="d-flex flex-column gap-3">
+
+                <!-- 📦 Productos -->
                 <h:link outcome="listado" styleClass="btn btn-primary btn-lg text-start">
-                    <i class="fa-solid fa-list me-2"/>
+                    <i class="fa-solid fa-list me-2"></i>
                     Catálogo de Productos
-                    <!-- Muestra el número de productos disponibles -->
                     <span class="badge bg-light text-dark ms-2">
-                        #{productoCtrl.productos.size()}
-                    </span>
+                            #{productoCtrl.productos.size()}
+                        </span>
                 </h:link>
 
-                <h:link outcome="alta_producto" styleClass="btn btn-success btn-lg text-start">
+                <!-- ➕ Alta producto -->
+                <h:link outcome="alta_producto"
+                        rendered="#{prefs.rol eq 'admin'}"
+                        styleClass="btn btn-success btn-lg text-start">
                     <i class="fa-solid fa-plus me-2"/>
                     Añadir Nuevo Producto
                 </h:link>
 
+                <!-- 📦 Pedidos -->
                 <h:link outcome="pedidos" styleClass="btn btn-secondary btn-lg text-start">
-                    <i class="fa-solid fa-box me-2"/>
+                    <i class="fa-solid fa-box me-2"></i>
                     Mis Pedidos
                     <span class="badge bg-light text-dark ms-2">
-                        #{pedidoCtrl.pedidos.size()}
-                    </span>
+                            #{pedidoCtrl.pedidos.size()}
+                        </span>
                 </h:link>
 
+                <!-- 🛒 Carrito -->
                 <h:link outcome="carro" styleClass="btn btn-warning btn-lg text-start">
-                    <i class="fa-solid fa-cart-shopping me-2"/>
+                    <i class="fa-solid fa-cart-shopping me-2"></i>
                     Mi Carrito
                 </h:link>
 
+                <!-- 👤 Perfil -->
                 <h:link outcome="perfil" styleClass="btn btn-outline-dark btn-lg text-start">
-                    <i class="fa-solid fa-user me-2"/>
+                    <i class="fa-solid fa-user me-2"></i>
                     Mi Perfil
                 </h:link>
+
             </div>
+
         </div>
+
     </ui:define>
 
 </ui:composition>
+
+</html>

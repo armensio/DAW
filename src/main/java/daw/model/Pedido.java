@@ -1,5 +1,8 @@
 package daw.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.Date;
 
 /**
@@ -12,11 +15,13 @@ import java.util.Date;
  * - Usuario (mediante idUsuario)
  * - LineaPedido (como conjunto de productos del pedido)
  */
+@Entity
 public class Pedido {
 
     /**
      * Identificador único del pedido.
      */
+    @Id
     private Integer idPedido = 0;
 
     /**

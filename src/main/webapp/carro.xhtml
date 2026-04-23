@@ -4,6 +4,10 @@
                 xmlns:f="jakarta.faces.core"
                 template="/WEB-INF/templates/layout.xhtml">
 
+    <f:metadata>
+        <f:viewAction action="#{loginCtrl.comprobarLogin}" />
+    </f:metadata>
+
     <ui:define name="titulo">Mi Carrito - DAW_Market</ui:define>
 
     <ui:define name="contenido">
@@ -20,7 +24,6 @@
                  Cuando exista sesión de usuario, pasar su idPedido por parámetro.
                  Por ahora mostramos el pedido 3 (pendiente) como ejemplo. -->
             <f:metadata>
-                <f:viewParam name="id" value="#{pedidoCtrl.pedido.idPedido}"/>
                 <f:viewAction action="#{pedidoCtrl.recupera()}"/>
             </f:metadata>
 

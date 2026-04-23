@@ -1,8 +1,10 @@
 package daw.controller;
 
-import daw.dao.UsuarioDAO;
+import daw.DAOJData;
+import daw.JData.UsuarioDAOJData;
 import daw.dao.DAOException;
 import daw.model.Usuario;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -27,7 +29,8 @@ public class UsuarioController implements Serializable {
     /**
      * DAO de usuarios para acceso a datos.
      */
-    @Inject private UsuarioDAO usuarioDAO;
+    @Inject @DAOJData
+    private UsuarioDAOJData usuarioDAO;
 
     /**
      * Contexto de JSF para mostrar mensajes en la interfaz.

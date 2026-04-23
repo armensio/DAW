@@ -3,19 +3,20 @@ package daw.dao;
 import daw.daoInterfaces.CategoriaDAOInt;
 import daw.model.Categoria;
 import jakarta.enterprise.context.ApplicationScoped;
+import daw.DAOMap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  * DAO para la entidad Categoria.
- *
- * Gestiona las categorías en memoria proporcionando operaciones CRUD básicas.
+ * Gestiona las categor
+ * ías en memoria proporcionando operaciones CRUD básicas.
  */
 @ApplicationScoped
+@DAOMap
 public class CategoriaDAO implements CategoriaDAOInt, Serializable {
 
     private Map<Integer, Categoria> categorias;

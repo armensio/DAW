@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>Login</title>
+</h:head>
+
+<h:body>
+
+    <h2>Login</h2>
+
+    <h:form>
+        <h:panelGrid columns="2">
+
+            <h:outputLabel value="Usuario:"/>
+            <h:inputText value="#{loginCtrl.usuario}" />
+
+            <h:outputLabel value="Password:"/>
+            <h:inputSecret value="#{loginCtrl.password}" />
+
+        </h:panelGrid>
+
+        <h:commandButton value="Entrar" action="#{loginCtrl.login}" />
+
+    </h:form>
+
+    <h:messages style="color:red"/>
+
+</h:body>
+</html>

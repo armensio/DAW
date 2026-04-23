@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import daw.DAOMap;
+
 
 /**
  * Implementación del DAO (Data Access Object) para la entidad Producto.
@@ -22,6 +24,7 @@ import java.util.Map;
  * se pierden al reiniciar la aplicación.
  */
 @ApplicationScoped
+@DAOMap
 public class ProductoDAO implements ProductoDAOInt, Serializable {
 
     /**
@@ -39,6 +42,24 @@ public class ProductoDAO implements ProductoDAOInt, Serializable {
      */
     public ProductoDAO() {
         productos = new HashMap<>();
+
+        Producto p1 = new Producto();
+        p1.setNombre("Arroz");
+        p1.setPrecio(1.2f);
+        p1.setIdCategoria(1);
+        crea(p1);
+
+        Producto p2 = new Producto();
+        p2.setNombre("Lentejas");
+        p2.setPrecio(2.0f);
+        p2.setIdCategoria(1);
+        crea(p2);
+
+        Producto p3 = new Producto();
+        p3.setNombre("Leche");
+        p3.setPrecio(0.95f);
+        p3.setIdCategoria(4);
+        crea(p3);
     }
 
     /**

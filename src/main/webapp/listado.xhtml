@@ -4,56 +4,74 @@
                 xmlns:f="jakarta.faces.core"
                 template="/WEB-INF/templates/layout.xhtml">
 
+    <!-- 🔐 PROTECCIÓN AQUÍ -->
+    <f:metadata>
+        <f:viewAction action="#{loginCtrl.comprobarLogin}" />
+    </f:metadata>
+
     <ui:define name="titulo">Listado de Productos</ui:define>
 
     <ui:define name="contenido">
         <h1>Listado de Productos</h1>
 
-        <h:messages styleClass="alert alert-danger" errorClass="alert alert-danger"
-                    infoClass="alert alert-success" showDetail="true"/>
+        <h:messages styleClass="alert alert-danger"
+                    errorClass="alert alert-danger"
+                    infoClass="alert alert-success"
+                    showDetail="true"/>
 
         <h:form>
-            <table class="table table-striped-columns">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Categoría</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ui:repeat var="p" value="#{productoCtrl.productos}">
-                        <tr>
-                            <td>#{p.nombre}</td>
-                            <td>#{p.precio} €</td>
-                            <td>#{p.stock}</td>
-                            <td>#{p.idCategoria}</td>
-                            <td>
-                                <!-- Botón Editar: navega a editar_producto.xhtml?id=X -->
-                                <h:button value="Editar"
-                                          styleClass="btn btn-sm btn-warning me-1"
-                                          outcome="editar_producto">
-                                    <f:param name="id" value="#{p.idProducto}"/>
-                                </h:button>
+            <h:dataTable value="#{productoCtrl.productos}" var="p"
+                         styleClass="table table-striped-columns">
 
-                                <!-- Botón Borrar: llama al controlador con AJAX -->
-                                <h:commandButton value="Borrar"
-                                                 styleClass="btn btn-sm btn-danger"
-                                                 action="#{productoCtrl.borra(p)}">
-                                    <f:ajax render="@form"/>
-                                </h:commandButton>
-                            </td>
-                        </tr>
-                    </ui:repeat>
-                </tbody>
-            </table>
+                <h:column>
+                    <f:facet name="header">Nombre</f:facet>
+                    #{p.nombre}
+                </h:column>
 
-            <p class="text-muted">Total: #{productoCtrl.productos.size()} productos</p>
+                <h:column>
+                    <f:facet name="header">Precio</f:facet>
+                    #{p.precio} €
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Stock</f:facet>
+                    #{p.stock}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Categoría</f:facet>
+                    #{p.idCategoria}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Acciones</f:facet>
+
+                    <!-- 🛒 Añadir -->
+                    <h:commandButton value="Añadir"
+                                     styleClass="btn btn-sm btn-primary me-1"
+                                     action="#{pedidoCtrl.addProducto}">
+
+                        <f:setPropertyActionListener target="#{pedidoCtrl.productoSeleccionado}" value="#{p}"/>
+
+                    </h:commandButton>
+
+                    <!-- 🗑 Borrar -->
+                    <h:commandButton value="Borrar"
+                                     rendered="#{prefs.rol eq 'admin'}"
+                                     action="#{productoCtrl.borra(p)}"
+                                     styleClass="btn btn-sm btn-danger"/>
+
+                </h:column>
+
+            </h:dataTable>
+
+            <p class="text-muted">
+                Total: #{productoCtrl.productos.size()} productos
+            </p>
         </h:form>
 
-        <h:link value="Nuevo Producto" outcome="alta_producto"
+        <h:link value="Nuevo Producto"
+                outcome="alta_producto"
                 styleClass="btn btn-success mt-2">
             <i class="fa-solid fa-plus me-1"/>
         </h:link>

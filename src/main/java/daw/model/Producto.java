@@ -1,5 +1,7 @@
 package daw.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 /**
  * Clase que representa un producto del sistema.
  *
@@ -10,11 +12,13 @@ package daw.model;
  * - Categoria (mediante idCategoria)
  * - LineaPedido (como producto dentro de pedidos)
  */
+@Entity
 public class Producto {
 
     /**
      * Identificador único del producto.
      */
+    @Id
     private Integer idProducto = 0;
 
     /**

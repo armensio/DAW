@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import daw.DAOMap;
 
 /**
  * DAO para la entidad LineaPedido.
@@ -16,6 +17,7 @@ import java.util.Map;
  * y búsquedas por pedido o producto.
  */
 @ApplicationScoped
+@DAOMap
 public class LineaPedidoDAO implements LineaPedidoDAOInt, Serializable {
 
     private Map<Integer, LineaPedido> lineas;

@@ -1,5 +1,8 @@
 package daw.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 /**
  * Clase que representa una línea de pedido.
  *
@@ -8,11 +11,13 @@ package daw.model;
  *
  * Sirve como relación entre Pedido y Producto.
  */
+@Entity
 public class LineaPedido {
 
     /**
      * Identificador único de la línea de pedido.
      */
+    @Id
     private Integer idLinea = 0;
 
     /**
@@ -23,9 +28,7 @@ public class LineaPedido {
     /**
      * Precio unitario del producto en esta línea.
      */
-    private Integer precioUnitario = 0;
-
-    /**
+    private Double precioUnitario;    /**
      * Identificador del pedido al que pertenece esta línea.
      */
     private Integer idPedido = 0;
@@ -50,7 +53,7 @@ public class LineaPedido {
      * @param idPedido identificador del pedido
      * @param idProducto identificador del producto
      */
-    public LineaPedido(Integer idLinea, Integer cantidad, Integer precioUnitario, Integer idPedido, Integer idProducto) {
+    public LineaPedido(Integer idLinea, Integer cantidad, Double precioUnitario, Integer idPedido, Integer idProducto) {
         this.idLinea = idLinea;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
@@ -100,14 +103,13 @@ public class LineaPedido {
     /**
      * Devuelve el precio unitario del producto.
      */
-    public Integer getPrecioUnitario() {
+    public Double getPrecioUnitario() {
         return precioUnitario;
     }
-
     /**
      * Establece el precio unitario del producto.
      */
-    public void setPrecioUnitario(Integer precioUnitario) {
+    public void setPrecioUnitario(Double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
 
