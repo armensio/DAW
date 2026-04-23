@@ -45,6 +45,14 @@
             <version>4.0.1</version>
         </dependency>
 
+            <!-- Jakarta EE Web Profile (incluye CDI, JSF, etc.) -->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>11.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -53,6 +61,33 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+            </plugin>
+
+            <!--Pagina web en la nube-->
+            <plugin>
+                <groupId>fish.payara.maven.plugins</groupId>
+                <artifactId>payara-micro-maven-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <payaraVersion>7.2026.2</payaraVersion>
+                    <deployWar>true</deployWar>
+                    <contextRoot>/</contextRoot>
+                        <!-- Opcional: optimizar los recursos del servidor -->
+                    <commandLineOptions>
+                        <option>
+                            <key>--disablephonehome</key>
+                        </option>
+                        <option>
+                            <key>--noHazelcast</key>
+                        </option>
+                    </commandLineOptions>
+                    <javaCommandLineOptions>
+                        <option>
+                            <key>-Djava.security.egd</key>
+                            <value>file:/dev/./urandom</value>
+                        </option>
+                    </javaCommandLineOptions>
+                </configuration>
             </plugin>
         </plugins>
     </build>

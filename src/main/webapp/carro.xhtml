@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="titulo">Mi Carrito - DAW_Market</ui:define>
+
+    <ui:define name="contenido">
+        <h:button value="⬅ Volver"
+                  outcome="menu"
+                  styleClass="btn btn-outline-secondary mb-3"/>
+        <div style="max-width:900px; margin: 0 auto;" class="mt-4">
+            <h2><i class="fa-solid fa-cart-shopping me-2"/>Mi Carrito</h2>
+            <hr/>
+
+            <h:messages styleClass="alert alert-danger" showDetail="true"/>
+
+            <!-- Recupera el pedido en estado "pendiente" del usuario actual.
+                 Cuando exista sesión de usuario, pasar su idPedido por parámetro.
+                 Por ahora mostramos el pedido 3 (pendiente) como ejemplo. -->
+            <f:metadata>
+                <f:viewParam name="id" value="#{pedidoCtrl.pedido.idPedido}"/>
+                <f:viewAction action="#{pedidoCtrl.recupera()}"/>
+            </f:metadata>
+
+            <!-- Si no hay pedido cargado mostramos mensaje -->
+            <h:panelGroup rendered="#{pedidoCtrl.pedido.idPedido == 0}">
+                <div class="alert alert-info">
+                    No tienes ningún pedido pendiente en el carrito.
+                </div>
+            </h:panelGroup>
+
+            <!-- Si hay pedido cargado mostramos sus líneas -->
+            <h:panelGroup rendered="#{pedidoCtrl.pedido.idPedido != 0}">
+                <h:form>
+                    <table class="table table-striped-columns mt-3 align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID Producto</th>
+                                <th>Precio Unitario</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ui:repeat var="linea" value="#{pedidoCtrl.lineasPedidoActual}">
+                                <tr>
+                                    <td>Producto ##{linea.idProducto}</td>
+                                    <td>#{linea.precioUnitario} €</td>
+                                    <td>#{linea.cantidad}</td>
+                                    <td>
+                                        <strong>
+                                            #{linea.precioUnitario * linea.cantidad} €
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                        <tfoot class="table-group-divider">
+                            <tr>
+                                <td colspan="3" class="text-end fs-5">
+                                    <strong>Total a pagar:</strong>
+                                </td>
+                                <td class="fs-5 text-success">
+                                    <strong>#{pedidoCtrl.pedido.total} €</strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <h:link outcome="listado" styleClass="btn btn-outline-secondary">
+                            <i class="fa-solid fa-arrow-left me-1"/>
+                            Seguir Comprando
+                        </h:link>
+                        <h:commandButton value="Tramitar Pedido"
+                                         styleClass="btn btn-success px-4"/>
+                    </div>
+                </h:form>
+            </h:panelGroup>
+
+        </div>
+    </ui:define>
+
+</ui:composition>

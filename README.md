@@ -1,3 +1,11 @@
+## 🌐 Despliegue de la aplicación
+
+### Pablo
+## URLs de despliegue
+
+- Pablo:
+  http://35.184.164.235/app/hello-servlet
+=======
 # Mi Gran Proyecto
 
 ## Nombre del proyecto
@@ -31,10 +39,15 @@ actividad.
   * Gestionar los pedidos
   * Gestionar los usuarios
 
+## URLs públicas 
+ * http://34.28.226.57/  (Luis Carlos)
+ * Pablo: http://35.184.164.235/app/hello-servlet
+ * Eduardo: http://136.119.227.42/
+
 
 ## Storyboard
 ![img.png](img.png)
 
 ## Diagrama ER
 
-![Diagrama ER](./doc/er_diagrama.png)
+![Diagrama ER](doc/er_diagram.png)

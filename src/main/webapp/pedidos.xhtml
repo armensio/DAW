@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="titulo">Mis Pedidos - DAW_Market</ui:define>
+
+    <ui:define name="contenido">
+        <div style="max-width:900px; margin: 0 auto;" class="mt-4">
+            <h2><i class="fa-solid fa-boxes-packing me-2"/>Mis Pedidos</h2>
+            <hr/>
+
+            <h:messages styleClass="alert alert-danger" showDetail="true"/>
+
+            <h:form>
+                <table class="table table-striped-columns mt-3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nº Pedido</th>
+                            <th>Fecha</th>
+                            <th>Dirección</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat var="p" value="#{pedidoCtrl.pedidos}">
+                            <tr>
+                                <td><strong>##{p.idPedido}</strong></td>
+                                <td>
+                                    <h:outputText value="#{p.fecha}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </td>
+                                <td>#{p.direccion}</td>
+                                <td><strong>#{p.total} €</strong></td>
+                                <td>
+                                    <!-- Badge de color según el estado del pedido -->
+                                    <h:panelGroup rendered="#{p.estado == 'pendiente'}">
+                                        <span class="badge bg-warning text-dark">Pendiente</span>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{p.estado == 'enviado'}">
+                                        <span class="badge bg-info text-dark">Enviado</span>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{p.estado == 'entregado'}">
+                                        <span class="badge bg-success">Entregado</span>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{p.estado == 'cancelado'}">
+                                        <span class="badge bg-danger">Cancelado</span>
+                                    </h:panelGroup>
+                                </td>
+                                <td class="text-center">
+                                    <h:commandButton value="Borrar"
+                                                     styleClass="btn btn-sm btn-danger"
+                                                     action="#{pedidoCtrl.borra(p)}">
+                                        <f:ajax render="@form"/>
+                                    </h:commandButton>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
+
+                <p class="text-muted">Total: #{pedidoCtrl.pedidos.size()} pedidos</p>
+            </h:form>
+
+            <h:link outcome="menu" styleClass="btn btn-outline-secondary mt-2">
+                <i class="fa-solid fa-arrow-left me-1"/>
+                Volver al Menú
+            </h:link>
+        </div>
+    </ui:define>
+
+</ui:composition>

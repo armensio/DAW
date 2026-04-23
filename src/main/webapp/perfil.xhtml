@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="titulo">Mi Perfil - DAW_Market</ui:define>
+
+    <ui:define name="contenido">
+        <div style="max-width:600px; margin: 0 auto;" class="mt-4">
+            <h2><i class="fa-solid fa-user me-2"/>Mi Perfil</h2>
+            <hr/>
+
+            <h:messages styleClass="alert alert-danger" showDetail="true"/>
+
+            <h:form>
+                <div class="card p-4 shadow-sm">
+
+                    <!-- Nombre -->
+                    <div class="mb-3">
+                        <h:outputLabel for="nombre" value="Nombre completo"
+                                       styleClass="form-label fw-bold"/>
+                        <h:inputText id="nombre"
+                                     value="#{usuarioCtrl.usuario.nombre}"
+                                     styleClass="form-control"
+                                     required="true"
+                                     requiredMessage="El nombre es obligatorio"/>
+                        <h:message for="nombre" styleClass="text-danger small"/>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <h:outputLabel for="email" value="Correo electrónico"
+                                       styleClass="form-label fw-bold"/>
+                        <h:inputText id="email"
+                                     value="#{usuarioCtrl.usuario.email}"
+                                     styleClass="form-control"
+                                     required="true"
+                                     requiredMessage="El email es obligatorio"/>
+                        <h:message for="email" styleClass="text-danger small"/>
+                    </div>
+
+                    <!-- Fecha de nacimiento -->
+                    <div class="mb-3">
+                        <h:outputLabel for="fechaNac" value="Fecha de nacimiento"
+                                       styleClass="form-label fw-bold"/>
+                        <h:inputText id="fechaNac"
+                                     value="#{usuarioCtrl.usuario.fechaNacimiento}"
+                                     styleClass="form-control"
+                                     converterMessage="Formato de fecha no válido">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>
+                        <h:message for="fechaNac" styleClass="text-danger small"/>
+                    </div>
+
+                    <!-- Rol (solo lectura, no editable por el usuario) -->
+                    <div class="mb-3">
+                        <span class="form-label fw-bold">Rol: </span>
+                        <span class="badge bg-secondary">#{usuarioCtrl.usuario.rol}</span>
+                    </div>
+
+                    <hr/>
+
+                    <div class="d-flex justify-content-between">
+                        <h:link outcome="menu" styleClass="btn btn-outline-secondary">
+                            <i class="fa-solid fa-arrow-left me-1"/>
+                            Volver al Menú
+                        </h:link>
+                        <h:commandButton value="Guardar cambios"
+                                         styleClass="btn btn-primary"
+                                         action="#{usuarioCtrl.guarda()}"/>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

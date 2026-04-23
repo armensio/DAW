@@ -1,0 +1,56 @@
+@startuml
+'title "Diagrama Entidad-Relación"
+
+'Descomentar para formato estándar (quitar carácter ' en líneas más abajo)
+'hide circle
+'skinparam classAttributeIconSize 0
+
+entity Usuario {
+    ' llave primaria y autogenerada
+    * idUsuario : Integer <<generated, PK>>
+    * fecha_nacimiento: Date
+    * nombre: String
+    * email: String
+    * contraseña: String
+    * rol: String
+}
+entity Producto {
+    * idProducto : Integer <<generated, PK>>
+    * nombre: String
+    * precio: Float
+    * stock: Integer
+    * idCategoria: Integer <<FK>>
+}
+
+entity LineaPedido {
+    * idLinea : Integer <<generated, PK>>
+    * cantidad: Integer
+    * precioUnitario: Integer
+    * idPedido: Integer <<FK>>
+    * idProducto: Integer <<FK>>
+
+}
+entity Pedido {
+    ' llave primaria y autogenerada
+    * idPedido : Integer <<generated, PK>>
+    * fecha: Date
+    * estado: String
+    * total: Float
+    * direccion: String
+    * idUsuario: Integer <<FK>>
+}
+
+entity Categoria{
+    * idCategoria : Integer <<generated, PK>>
+    * nombre: String
+}
+'uno a muchos
+'Entity01 ||--|{ Entity02
+'uno a uno
+'Entity02 ||--|| Entity03
+
+Pedido ||--|{ LineaPedido
+Producto ||--|{ LineaPedido
+Usuario ||--|{ Pedido
+Categoria ||-|{ Producto
+@enduml

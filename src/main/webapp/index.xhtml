@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html">
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets">
 
 <h:head>
-    <title>Better Learn DAW</title>
-    <header>
-        <h1>Mi sitio</h1>
-        <span class="etiqueta">Nueva etiqueta</span>  <!-- ← aquí -->
-    </header>
+    <title>DAW_Market</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
 </h:head>
 
-<h:body>
-    <h1>Sample Facelet template</h1>
-    <h2>#{app.welcomeMessage}</h2>
-    <ul>
-        <li><a href="hello-servlet">Sample Servlet</a></li>
-        <li><a href="jsptemplate.jsp">Sample JSP template</a></li>
-        <li><a href="listado.html">Ver listado de productos</a></li>
-    </ul>
-</h:body>
+<h:body class="d-flex flex-column align-items-center justify-content-center"
+        style="min-height:100vh; background-color:#f8f9fa;">
 
+    <div class="text-center p-5">
+        <i class="fa-solid fa-store fa-4x mb-3 text-success"/>
+        <h1 class="fw-bold">DAW_Market</h1>
+        <p class="text-muted mb-4">Tu tienda de alimentación online</p>
+
+        <div class="d-flex flex-column gap-3" style="max-width:300px; margin:0 auto;">
+            <h:link value="Entrar al mercado" outcome="menu"
+                    styleClass="btn btn-success btn-lg"/>
+            <h:link value="Ver catálogo" outcome="listado"
+                    styleClass="btn btn-outline-secondary btn-lg"/>
+        </div>
+
+        <p class="mt-4 text-muted small">
+            #{productoCtrl.productos.size()} productos disponibles
+        </p>
+    </div>
+
+</h:body>
 </html>

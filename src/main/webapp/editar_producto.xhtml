@@ -4,21 +4,34 @@
                 xmlns:f="jakarta.faces.core"
                 template="/WEB-INF/templates/layout.xhtml">
 
-    <ui:define name="titulo">Nuevo Producto</ui:define>
+    <ui:define name="titulo">Editar Producto</ui:define>
 
     <ui:define name="contenido">
-        <h:button value="⬅ Volver"
-                  outcome="menu"
-                  styleClass="btn btn-outline-secondary mb-3"/>
-        <div style="max-width:600px; margin: 0 auto;">
 
-            <h2><i class="fa-solid fa-box-open me-2"/>Nuevo Producto</h2>
+        <!-- Recupera el producto a editar a partir del parámetro ?id=X de la URL -->
+        <f:metadata>
+            <f:viewParam name="id"
+                         value="#{productoCtrl.producto.idProducto}"
+                         required="true"
+                         requiredMessage="Debes indicar el ID del producto a editar"/>
+            <f:viewAction action="#{productoCtrl.recupera()}"/>
+        </f:metadata>
+
+        <div style="max-width:600px; margin: 0 auto;">
+            <h2><i class="fa-solid fa-pen-to-square me-2"/>Editar Producto</h2>
             <hr/>
 
-            <!-- Mensajes de error de validación -->
             <h:messages styleClass="alert alert-danger" showDetail="true"/>
 
             <h:form>
+
+                <!-- ID: solo lectura, no editable -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">ID del producto</label>
+                    <p class="form-control-plaintext">#{productoCtrl.producto.idProducto}</p>
+                    <!-- Campo oculto para que el ID viaje en el POST y guarda() lo encuentre -->
+                    <h:inputHidden value="#{productoCtrl.producto.idProducto}"/>
+                </div>
 
                 <!-- Nombre -->
                 <div class="mb-3">
@@ -27,7 +40,6 @@
                     <h:inputText id="nombre"
                                  value="#{productoCtrl.producto.nombre}"
                                  styleClass="form-control"
-                                 placeholder="Ej: Lentejas"
                                  required="true"
                                  requiredMessage="El nombre es obligatorio"/>
                     <h:message for="nombre" styleClass="text-danger small"/>
@@ -42,12 +54,10 @@
                         <h:inputText id="precio"
                                      value="#{productoCtrl.producto.precio}"
                                      styleClass="form-control"
-                                     placeholder="0.00"
                                      required="true"
                                      requiredMessage="El precio es obligatorio"
                                      converterMessage="Introduce un número válido, p.ej: 1.99">
                             <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-                            <f:validateLongRange minimum="0"/>
                         </h:inputText>
                     </div>
                     <h:message for="precio" styleClass="text-danger small"/>
@@ -60,11 +70,10 @@
                     <h:inputText id="stock"
                                  value="#{productoCtrl.producto.stock}"
                                  styleClass="form-control"
-                                 placeholder="0"
                                  required="true"
                                  requiredMessage="El stock es obligatorio"
                                  converterMessage="El stock debe ser un número entero">
-                        <f:validateLongRange minimum="1"/>
+                        <f:validateLongRange minimum="0"/>
                     </h:inputText>
                     <h:message for="stock" styleClass="text-danger small"/>
                 </div>
@@ -78,7 +87,6 @@
                                      styleClass="form-select"
                                      required="true"
                                      requiredMessage="Selecciona una categoría">
-                        <f:selectItem itemValue="0" itemLabel="-- Selecciona una categoría --"/>
                         <f:selectItems value="#{productoCtrl.categorias}"
                                        var="cat"
                                        itemValue="#{cat.idCategoria}"
@@ -89,13 +97,15 @@
 
                 <!-- Botones -->
                 <div class="d-flex gap-2 mt-4">
-                    <h:commandButton value="Guardar producto"
+                    <h:commandButton value="Guardar cambios"
                                      styleClass="btn btn-success"
-                                     action="#{productoCtrl.crea()}"/>
-
-                    <h:button value="Cancelar"
-                              styleClass="btn btn-secondary"
-                              outcome="menu"/>
+                                     action="#{productoCtrl.guarda()}"/>
+                    <h:commandButton value="Cancelar"
+                                     styleClass="btn btn-secondary"
+                                     action="listado?faces-redirect=true"
+                                     immediate="true">
+                        <i class="fa-solid fa-arrow-left me-1"/>
+                    </h:commandButton>
                 </div>
 
             </h:form>

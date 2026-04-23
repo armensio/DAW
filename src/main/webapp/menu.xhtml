@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                template="/WEB-INF/templates/layout.xhtml">
+
+    <!--<ui:define name="titulo">Menú Principal - DAW_Market</ui:define>-->
+
+    <ui:define name="contenido">
+        <div style="max-width:600px; margin: 0 auto;" class="mt-4">
+            <h2><i class="fa-solid fa-house me-2"/>Menú Principal</h2>
+            <hr/>
+
+            <p class="mb-4 text-muted">Selecciona la operación que deseas realizar:</p>
+
+            <div class="d-flex flex-column gap-3">
+                <h:link outcome="listado" styleClass="btn btn-primary btn-lg text-start">
+                    <i class="fa-solid fa-list me-2"/>
+                    Catálogo de Productos
+                    <!-- Muestra el número de productos disponibles -->
+                    <span class="badge bg-light text-dark ms-2">
+                        #{productoCtrl.productos.size()}
+                    </span>
+                </h:link>
+
+                <h:link outcome="alta_producto" styleClass="btn btn-success btn-lg text-start">
+                    <i class="fa-solid fa-plus me-2"/>
+                    Añadir Nuevo Producto
+                </h:link>
+
+                <h:link outcome="pedidos" styleClass="btn btn-secondary btn-lg text-start">
+                    <i class="fa-solid fa-box me-2"/>
+                    Mis Pedidos
+                    <span class="badge bg-light text-dark ms-2">
+                        #{pedidoCtrl.pedidos.size()}
+                    </span>
+                </h:link>
+
+                <h:link outcome="carro" styleClass="btn btn-warning btn-lg text-start">
+                    <i class="fa-solid fa-cart-shopping me-2"/>
+                    Mi Carrito
+                </h:link>
+
+                <h:link outcome="perfil" styleClass="btn btn-outline-dark btn-lg text-start">
+                    <i class="fa-solid fa-user me-2"/>
+                    Mi Perfil
+                </h:link>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

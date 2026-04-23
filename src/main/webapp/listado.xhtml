@@ -1,68 +1,63 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="jakarta.faces.facelets"
                 xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
                 template="/WEB-INF/templates/layout.xhtml">
 
     <ui:define name="titulo">Listado de Productos</ui:define>
 
     <ui:define name="contenido">
         <h1>Listado de Productos</h1>
-        <table class="table table-striped-columns">
-            <thead>
-            <tr>
-                <th>Imagen</th>
-                <th>Producto</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Comprar</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><h:graphicImage value="lentejas.jpg" width="150"/></td>
-                <td>Lentejas</td>
-                <td>1 kilo</td>
-                <td>1€</td>
-                <td>
-                    <h:form>
-                        <span>Cantidad: </span>
-                        <h:inputText value="1" style="width:60px;"/>
-                        <h:commandButton value="Añadir" styleClass="btn btn-sm btn-primary"/>
-                    </h:form>
-                </td>
-            </tr>
-            <tr>
-                <td><h:graphicImage value="arroz.jpg" width="150"/></td>
-                <td>Arroz</td>
-                <td>1 kilo</td>
-                <td>1,50€</td>
-                <td>
-                    <h:form>
-                        <span>Cantidad: </span>
-                        <h:inputText value="1" style="width:60px;"/>
-                        <h:commandButton value="Añadir" styleClass="btn btn-sm btn-primary"/>
-                    </h:form>
-                </td>
-            </tr>
-            <tr>
-                <td><h:graphicImage value="macarrones.jpg" width="150"/></td>
-                <td>Macarrones</td>
-                <td>1 kilo</td>
-                <td>1,20€</td>
-                <td>
-                    <h:form>
-                        <span>Cantidad: </span>
-                        <h:inputText value="1" style="width:60px;"/>
-                        <h:commandButton value="Añadir" styleClass="btn btn-sm btn-primary"/>
-                    </h:form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
 
-        <a href="alta_producto.xhtml" class="btn btn-success mt-2">
-            <i class="fa-solid fa-plus me-1"></i> Nuevo Producto
-        </a>
+        <h:messages styleClass="alert alert-danger" errorClass="alert alert-danger"
+                    infoClass="alert alert-success" showDetail="true"/>
+
+        <h:form>
+            <table class="table table-striped-columns">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Categoría</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ui:repeat var="p" value="#{productoCtrl.productos}">
+                        <tr>
+                            <td>#{p.nombre}</td>
+                            <td>#{p.precio} €</td>
+                            <td>#{p.stock}</td>
+                            <td>#{p.idCategoria}</td>
+                            <td>
+                                <!-- Botón Editar: navega a editar_producto.xhtml?id=X -->
+                                <h:button value="Editar"
+                                          styleClass="btn btn-sm btn-warning me-1"
+                                          outcome="editar_producto">
+                                    <f:param name="id" value="#{p.idProducto}"/>
+                                </h:button>
+
+                                <!-- Botón Borrar: llama al controlador con AJAX -->
+                                <h:commandButton value="Borrar"
+                                                 styleClass="btn btn-sm btn-danger"
+                                                 action="#{productoCtrl.borra(p)}">
+                                    <f:ajax render="@form"/>
+                                </h:commandButton>
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>
+
+            <p class="text-muted">Total: #{productoCtrl.productos.size()} productos</p>
+        </h:form>
+
+        <h:link value="Nuevo Producto" outcome="alta_producto"
+                styleClass="btn btn-success mt-2">
+            <i class="fa-solid fa-plus me-1"/>
+        </h:link>
+
     </ui:define>
 
 </ui:composition>
